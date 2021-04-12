@@ -10,7 +10,7 @@ pipeline {
         stage('Build'){
             steps{
                  sh script: 'mvn clean package'
-                 archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
+                 archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
         stage('Upload War To Nexus'){
@@ -23,8 +23,8 @@ pipeline {
                         [
                             artifactId: 'simple-app', 
                             classifier: '', 
-                            file: "target/simple-app-${mavenPom.version}.jar", 
-                            type: 'jar'
+                            file: "target/simple-app-${mavenPom.version}.war", 
+                            type: 'war'
                         ]
                     ], 
                     credentialsId: 'nexus3', 
